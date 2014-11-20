@@ -21,7 +21,7 @@
 
 \sloppy
 
-\title{Prova de Algorítmos}
+\title{Prova de Programas Imperativos}
 
 \author{Pedro Vanzella\inst{1}, Guilherme Taschetto\inst{1}}
 
@@ -34,13 +34,13 @@ Grande do Sul (PUCRS) \\ Av. Ipiranga, 6681 - Porto Alegre / RS / Brasil
 \maketitle
 
 \begin{abstract}
-    This excercise aims to prove the validity of the invariants and Hoare
-    triples for two algorithms, using induction and formal logical proofs.
+    This article aims to prove the partial correctness for two imperative programs
+    using Natural Induction and Hoare Logic as tools.
 \end{abstract}
 
 \begin{resumo}
-    Este exercício se propõe a provar a correção parcial de dois programas
-    imperativos, usando como meios para tal indução natural e provas lógicas formais.
+    Este artigo se propõe a provar a correção parcial de dois programas imperativos
+    usando como ferramentas para tal a Indução Natural e a Lógica de Hoare.
 \end{resumo}
 
 \section{Algoritmo 1}\label{sec:algo1}
@@ -87,13 +87,15 @@ $(| j = (x+1)^2 |)$
 \end{lstlisting}
 
 \subsection{Prova da Invariante}\label{sec:algo1:invar}
-Devemos provar que a invariante permanece válida durante a execução do laço, não importando o número de iterações, Ou seja, devemos provar que:
+Devemos provar que a invariante permanece válida durante a execução do laço, não importando o número de iterações. Ou seja, devemos provar que:
 \[\forall n:\mathds{N}. j_n = (i_n + 1)^2 \wedge i_n \leq x\]
 
 Aplicando o teorema da distributividade do operador $\forall$\footnote{$\forall x.P(x) \land Q(x) = \forall x.P(x) \land \forall x.Q(x)$},
 podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n = (i_n + 1)^2$ e $\forall n:\mathds{N}. i_n \leq x$.
 
-\subsubsection{Prova da primeira proposição}
+À partir disto, podemos aplicar técnicas de indução natural.
+
+\subsubsection{Prova - Parte I}
 
 Queremos provar que $\forall n:\mathds{N}. j_n = (i_n + 1)^2$. A proposição pode ser reescrita da forma:
 \[P(k) \triangleq j_k = (i_k + 1)^2\]
@@ -119,7 +121,7 @@ Agora, veja que:
   \:= (i_{k+1} + 1)^2 \= arit \\
 \end{proofbox}
 
-\subsubsection{Prova da segunda proposição}
+\subsubsection{Prova  - Parte II}
 
 Queremos provar que $\forall n:\mathds{N}. i_n \leq x$. A proposição pode ser reescrita da forma:
 \[P(k) \triangleq i_k \leq x\]
