@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage{fancyvrb}
+\usepackage{listings}
+\lstset {
+    mathescape,
+    frame=none
+}
+
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+
+\sloppy
+
+\title{Prova de Algorítmos}
+
+\author{Pedro Vanzella\inst{1}, Guilherme Taschetto\inst{1}}
+
+\address{Faculdade de Informática -- Pontifícia Universidade Católica do Rio
+Grande do Sul (PUCRS) \\ Av. Ipiranga, 6681 - Porto Alegre / RS / Brasil
+    \email{pedro@pedrovanzella.com, guilherme.taschetto@acad.pucrs.br}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    This excercise aims to prove the validity of the invariants and Hoare
+    triples for two algorithms, using induction and formal logical proofs.
+\end{abstract}
+
+\begin{resumo}
+    Este exercício se propõe a provar a validade das invariantes e triplas de
+    Hoare para dois algorítmos, usando indução e provas formais.
+\end{resumo}
+
+\section{Algoritmo 1}\label{sec:algo1}
+Vamos definir uma invariante e prová-la, bem como as triplas de Hoare, para o
+algoritmo a seguir:
+\begin{lstlisting}
+i := 1; j := 4;
+while i $\neq$ x
+    j := j + 2 * i + 3;
+    i := i + 1
+end
+\end{lstlisting}
+
+\subsection{Prova da Invariante}\label{sec:algo1:invar}
+Devemos provar que
+\[\forall n:\mathds{N}. j_n = (i_n + 1)^2 \wedge i_n \leq x\]
+
+De acordo com o teorema de distributividade do para-todo, podemos separar
+a invariante em duas partes e prová-las separadamente.
+
+\subsubsection{}
+
+\paragraph{Caso base} \[P(0) \triangleq j_0 = (i_0 + 1)^2 \]
+Veja que:
+\begin{lstlisting}
+(i$_0$ + 1)$^2$ $=$ (1 + 1)$^2$ (i := 1)
+$=$ 4 (arit)
+$= j_0$ (j := 4)
+$\qed$
+\end{lstlisting}
+
+\paragraph{Caso indutivo} \[P(k) \triangleq j_k = (i_k + 1)^2 \rightarrow
+P(k+1) \triangleq j_{k+1} = (i_{k+1} +1)^2\]
+Veja que:
+
+
+\section{Conclusão}
+\paragraph{}
+Insira conclusão aqui.
+É eeeeeasy. Tendeuquequedizê? Mecânicow.
+
+\bibliographystyle{sbc}
+\bibliography{teste}
+
+\end{document}
