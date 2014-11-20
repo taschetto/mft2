@@ -55,15 +55,18 @@ end
 \end{lstlisting}
 
 \subsection{Prova da Invariante}\label{sec:algo1:invar}
-Devemos provar que
+Devemos provar que a invariante permanece imutável durante a execução do laço, não importando o número de iterações, Ou seja, devemos provar que:
 \[\forall n:\mathds{N}. j_n = (i_n + 1)^2 \wedge i_n \leq x\]
 
-De acordo com o teorema de distributividade do para-todo, podemos separar
-a invariante em duas partes e prová-las separadamente.
+Aplicando o teorema da distributividade do operador $\forall$\footnote{$\forall x.P(x) \land Q(x) = \forall x.P(x) \land \forall x.Q(x)$},
+podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n = (i_n + 1)^2$ e $\forall n:\mathds{N}. i_n \leq x$.
 
-\subsubsection{}
+\subsubsection{Prova da primeira proposição}
 
-\paragraph{Caso base} \[P(0) \triangleq j_0 = (i_0 + 1)^2 \]
+Queremos provar que $\forall n:\mathds{N}. j_n = (i_n + 1)^2$. A proposição pode ser reescrita da forma:
+\[P(k) \triangleq j_k = (i_k + 1)^2\]
+
+\paragraph{Caso base} Precisamos provar que $P(0) \triangleq j_0 = (i_0 + 1)^2$
 Veja que:
 \begin{proofbox}
   \:(i_0 + 1)^2 = (1 + 1)^2   \= i:=1   \\
@@ -71,9 +74,40 @@ Veja que:
   \:= j_0                     \= j:=4   \\
 \end{proofbox}
 
-\paragraph{Caso indutivo} \[P(k) \triangleq j_k = (i_k + 1)^2 \rightarrow
-P(k+1) \triangleq j_{k+1} = (i_{k+1} +1)^2\]
+\paragraph{Caso indutivo} Assumimos $j_k = (i_k + 1)^2$ como Hipótese de Indução ($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq j_{k+1} = (i_{k+1} +1)^2\]
+Agora, veja que:
+\begin{proofbox}
+  \:j_{k+1} = j_k + 2*i_k + 3 \= j:=j+2*i+3 \\
+  \:= j_k + i_k + i_k + 3     \= arit   \\
+  \:= j_k + i_k + i_k + 1 + 2 \= arit   \\
+  \:= j_k + i_k + i_{k+1} + 2 \= i:=i+1 \\
+  \:= j_k + i_{k+1} + i_{k+1} + 1 \= i:=i+1 \\
+  \:= (i_k + 1)^2 + i_{k+1} + i_{k+1} + 1 \= HI \\
+  \:= i_{k+1}^2 + 2i_{k+1} + 1 \= i:=i+1 \\
+  \:= (i_{k+1} + 1)^2 \= arit \\
+\end{proofbox}
+
+\subsubsection{Prova da segunda proposição}
+
+Queremos provar que $\forall n:\mathds{N}. i_n \leq x$. A proposição pode ser reescrita da forma:
+\[P(k) \triangleq i_k \leq x\]
+
+\paragraph{Caso base} Precisamos provar que $P(0) \triangleq i_0 \leq x$
 Veja que:
+\begin{proofbox}
+  \:x > 0     \= PRE    \\
+  \:< 1       \= arit   \\
+  \:\geq i_0  \= i:=1   \\
+\end{proofbox}
+
+\paragraph{Caso indutivo} Assumimos $P(k) \triangleq i_k \leq x$ como Hipótese de Indução ($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq i_{k+1} \leq x\]
+Agora, veja que:
+\begin{proofbox}
+  \:i_k \leq x \land i_k \neq x \= HI\ e\ loop \\
+  sse\:i_k < x                  \= arit \\
+  sse\:i_k + 1 \leq x           \= arit \\
+  sse\:i_{k+1} \leq x           \= i:=i+1 \\
+\end{proofbox}
 
 \section{Conclusão}
 \paragraph{}
