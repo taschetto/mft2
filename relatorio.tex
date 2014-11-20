@@ -221,7 +221,19 @@ $end$
 Através da definição do cabeçalho do programa, podemos inferir a pré-condição da Tripla de Hoare correspondente: $(|\ n \geq 0\ |)$. Ainda, através de um teste de
 mesa podemos levantar hipóteses a respeito do que o programa faz e a invariante do laço.
 
-// TO DO TABELA
+\begin{table}[h]
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+$k$ & $i$ & $j$   & $x$ & $y$ & $n$ & $i \neq n$ & $j=xy^i \land i \leq n $ \\ \hline
+$0$ & $0$ & $2$   & $2$ & $3$ & $5$ & $0 \neq 5$ & $2=2   \times 3^0 \land 0 \leq 5 $ \\ \hline
+$1$ & $1$ & $6$   & $2$ & $3$ & $5$ & $1 \neq 5$ & $6=2   \times 3^1 \land 1 \leq 5 $ \\ \hline
+$2$ & $2$ & $18$  & $2$ & $3$ & $5$ & $2 \neq 5$ & $18=2  \times 3^2 \land 2 \leq 5 $ \\ \hline
+$3$ & $3$ & $54$  & $2$ & $3$ & $5$ & $3 \neq 5$ & $54=2  \times 3^3 \land 3 \leq 5 $ \\ \hline
+$4$ & $4$ & $162$ & $2$ & $3$ & $5$ & $4 \neq 5$ & $162=2 \times 3^4 \land 4 \leq 5 $ \\ \hline
+$5$ & $5$ & $486$ & $2$ & $3$ & $5$ & $5  =   5$  & $486=2 \times 3^5 \land 5 \leq 5 $ \\ \hline
+$-$ & $5$ & $486$ & $2$ & $3$ & $5$ & $0 \neq 5$ & $486=2 \times 3^5 \land 5 \leq 5 $ \\ \hline
+\end{tabular}
+\end{table}
 
 Analisando a tabela gerada, fica evidente que o programa tem, como objetivo, realizar o cálculo de $x*y^n$ e armazenar o resultado na variável $j$. Disto podemos concluir que a pós-condição
 da Tripla de Hoare é $(|\ j = x*y^n\ |)$. Além disto, encontramos um bom candidato para a invariante do laço: $j = x * y^i \land i \leq n$. Para ter certeza que a
