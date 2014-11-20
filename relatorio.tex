@@ -13,6 +13,7 @@
 
 \usepackage{amsthm}
 \usepackage{amssymb}
+\usepackage[fleqn]{amsmath}
 \usepackage{dsfont}
 
 \usepackage[brazil]{babel}
@@ -123,7 +124,7 @@ Agora, veja que:
 \end{proofbox}
 \hfill $\square$
 
-\subsubsection{Prova  - Parte II}
+\subsubsection{Prova - Parte II}
 
 Queremos provar que $\forall n:\mathds{N}. i_n \leq x$. A proposição pode ser reescrita da forma:
 \[P(k) \triangleq i_k \leq x\]
@@ -131,8 +132,8 @@ Queremos provar que $\forall n:\mathds{N}. i_n \leq x$. A proposição pode ser 
 \paragraph{Caso base} Precisamos provar que $P(0) \triangleq i_0 \leq x$
 Veja que:
 \begin{proofbox}
-  \:x > 0     \= PRE    \\
-  \:< 1       \= arit   \\
+  \:x > 0     \= PRE \\
+  \:< 1       \= Arit.   \\
   \:\geq i_0  \= i:=1   \\
 \end{proofbox}
 \hfill $\square$
@@ -140,10 +141,37 @@ Veja que:
 \paragraph{Caso indutivo} Assumimos $P(k) \triangleq i_k \leq x$ como Hipótese de Indução ($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq i_{k+1} \leq x\]
 Agora, veja que:
 \begin{proofbox}
-  \:i_k \leq x \land i_k \neq x \= HI\ e\ loop \\
-  sse\:i_k < x                  \= arit \\
-  sse\:i_k + 1 \leq x           \= arit \\
+  \:i_k \leq x \land i_k \neq x \= HI\ e\ laço \\
+  sse\:i_k < x                  \= Arit. \\
+  sse\:i_k + 1 \leq x           \= Arit. \\
   sse\:i_{k+1} \leq x           \= i:=i+1 \\
+\end{proofbox}
+\hfill $\square$
+
+\subsubsection{Prova da Tripla de Hoare}
+
+Desejamos, agora, provar a correção parcial da Tripla de Hoare definida anteriormente. Para facilitar, algumas definições auxiliares:
+\begin{align}
+S1  &\triangleq i:=1;\ j:=4; \nonumber \\
+S2  &\triangleq while\ i \neq x \{ S \} \nonumber \\
+S   &\triangleq j:=j+2*i+3;\ i:=i+1; \nonumber \\
+PRE &\triangleq x > 0 \nonumber \\
+POS &\triangleq j = (x + 1)^2 \land \lnot i \neq x \nonumber \\
+INV &\triangleq j = (i + 1)^2 \land i \leq x \nonumber
+\end{align}
+
+Agora, veja que:
+\begin{proofbox}
+  \:(|\ i \leq x\ |)\ i:=1\ (|\ 4 = (i + 1)^2 \land i \leq x\ |)\= Atrib. \\
+  \:(|\ 4 = (i + 1)^2 \land i \leq x\ |)\ j:=4\ (|\ j = (i + 1)^2 \land i \leq x\ |) \= Atrib.  \\
+  \:(|\ i \leq x\ |)\ S1\ (|\ INV\ |) \= Comp(1,2)  \\
+  \(\:x > 0 \= Hip., PRE \\
+    \:x \geq 1 \= Arit. \\
+    \:x \geq i \= i:=1 \\
+    \:i \leq x \= Simetria\ do\ operador 
+  \)\\
+  \:PRE \rightarrow i \leq x \= \intro\rightarrow(4-7) \\
+  \:(|\ PRE\ |)\ S1\ (|\ INV\ |) \= PreStren(8,3) \\
 \end{proofbox}
 \hfill $\square$
 
