@@ -17,6 +17,7 @@
 
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{boxproof}
 
 \sloppy
 
@@ -64,17 +65,15 @@ a invariante em duas partes e prová-las separadamente.
 
 \paragraph{Caso base} \[P(0) \triangleq j_0 = (i_0 + 1)^2 \]
 Veja que:
-\begin{lstlisting}
-(i$_0$ + 1)$^2$ $=$ (1 + 1)$^2$ (i := 1)
-$=$ 4 (arit)
-$= j_0$ (j := 4)
-$\qed$
-\end{lstlisting}
+\begin{proofbox}
+  \:(i_0 + 1)^2 = (1 + 1)^2   \= i:=1   \\
+  \:= 4                       \= arit   \\
+  \:= j_0                     \= j:=4   \\
+\end{proofbox}
 
 \paragraph{Caso indutivo} \[P(k) \triangleq j_k = (i_k + 1)^2 \rightarrow
 P(k+1) \triangleq j_{k+1} = (i_{k+1} +1)^2\]
 Veja que:
-
 
 \section{Conclusão}
 \paragraph{}
