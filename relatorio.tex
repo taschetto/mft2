@@ -44,7 +44,7 @@ Grande do Sul (PUCRS) \\ Av. Ipiranga, 6681 - Porto Alegre / RS / Brasil
     usando como ferramentas para tal a Indução Natural e a Lógica de Hoare.
 \end{resumo}
 
-\section{Algoritmo 1}\label{sec:algo1}
+\section{Algoritmo 01}\label{sec:algo1}
 \begin{lstlisting}
 $Algoritmo\ 01\ (inteiro\ positivo\ x)$
 $begin$
@@ -57,7 +57,7 @@ $\ \ \ \ \ \ \ \ i := i + 1$
 $end$
 \end{lstlisting}
 
-Através da definição do cabeçalho do programa, podemos inferir a pré-condição da Tripla de Hoare correspondente: $(| x > 0 |)$. Ainda, através de um teste de
+Através da definição do cabeçalho do programa, podemos inferir a pré-condição da Tripla de Hoare correspondente: $(|\ x > 0\ |)$. Ainda, através de um teste de
 mesa podemos levantar hipóteses a respeito do que o programa faz e a invariante do laço.
 
 \begin{table}[h]
@@ -72,19 +72,20 @@ $-$ & $4$ & $4$ & $25$ & $-       $ & $25=(4+1)^2 \land 4 \leq 4$ \\ \hline
 \end{tabular}
 \end{table}
 
-Analisando a tabela gerada, fica evidente que o programa tem, como objetivo, realizar o cálculo de $(x+1)^2$ e armazenar o resultado na variável $j$. Disto podemos concluir que a pós-condição
-da Tripla de Hoare é $(| j = (x+1)^2 |)$. Além disto, encontramos um bom candidato para a invariante do laço: $j=(i+1)^2 \land i \leq x $. Para ter certeza que a
+Analisando a tabela gerada, fica evidente que o programa tem como objetivo realizar o cálculo de $(x+1)^2$ e armazenar o resultado na variável $j$. Disto podemos concluir que a pós-condição
+da Tripla de Hoare é $(|\ j = (x+1)^2 \land i = x\ |)$. Além disto, encontramos um bom candidato para a invariante do laço: $j=(i+1)^2 \land i \leq x $. Para ter certeza que a
 invariante é válida, é necessário realizar a prova formal da mesma.
 
 \subsection{Tripla de Hoare}
 
 \begin{lstlisting}
-$(| x > 0 |)$
-$i := 1; j := 4;$
+$(|\ x > 0\ |)$
+$i := 1;$
+$j := 4;$
 $while\ i \neq x$
 $\ \ \ \ j := j + 2 * i + 3;$
 $\ \ \ \ i := i + 1$
-$(| j = (x+1)^2 |)$
+$(|\ j = (x+1)^2 \land i = x\ |)$
 \end{lstlisting}
 
 \subsection{Prova da Invariante}\label{sec:algo1:invar}
@@ -92,9 +93,7 @@ Devemos provar que a invariante permanece válida durante a execução do laço,
 \[\forall n:\mathds{N}. j_n = (i_n + 1)^2 \wedge i_n \leq x\]
 
 Aplicando o teorema da distributividade do operador $\forall$\footnote{$\forall x.P(x) \land Q(x) = \forall x.P(x) \land \forall x.Q(x)$},
-podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n = (i_n + 1)^2$ e $\forall n:\mathds{N}. i_n \leq x$.
-
-À partir disto, podemos aplicar técnicas de indução natural.
+podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n = (i_n + 1)^2$ e $\forall n:\mathds{N}. i_n \leq x$. À partir disto, podemos aplicar técnicas de indução natural.
 
 \subsubsection{Prova - Parte I}
 
@@ -153,14 +152,16 @@ Agora, veja que:
 Desejamos, agora, provar a correção parcial da Tripla de Hoare definida anteriormente. Para facilitar, algumas definições auxiliares:
 \begin{align}
 S1  &\triangleq i:=1;\ j:=4; \nonumber \\
-S2  &\triangleq while\ i \neq x \{ S \} \nonumber \\
-S   &\triangleq j:=j+2*i+3;\ i:=i+1; \nonumber \\
+S2  &\triangleq while\ i \neq x\ \{ S \} \nonumber \\
+S   &\triangleq Sa;\ Sb \nonumber \\
+Sa  &\triangleq j:=j+2*i+3 \nonumber \\
+Sb  &\triangleq i:=i+1 \nonumber \\
 PRE &\triangleq x > 0 \nonumber \\
 POS &\triangleq j = (x + 1)^2 \land \lnot i \neq x \nonumber \\
 INV &\triangleq j = (i + 1)^2 \land i \leq x \nonumber
 \end{align}
 
-Agora, veja que:
+Em um primeiro momento desejamos provar a correção parcial de $(|\ PRE\ |)\ S1\ (|\ INV\ |)$. Agora, veja que:
 \begin{proofbox}
   \:(|\ i \leq x\ |)\ i:=1\ (|\ 4 = (i + 1)^2 \land i \leq x\ |)\= Atrib. \\
   \:(|\ 4 = (i + 1)^2 \land i \leq x\ |)\ j:=4\ (|\ j = (i + 1)^2 \land i \leq x\ |) \= Atrib.  \\
@@ -174,6 +175,83 @@ Agora, veja que:
   \:(|\ PRE\ |)\ S1\ (|\ INV\ |) \= PreStren(8,3) \\
 \end{proofbox}
 \hfill $\square$
+
+Agora, desejamos provar que $(|\ INV\ |)\ S2\ (|\ POS\ |)$. Então, veja:
+\begin{proofbox}
+  \:(|\ j + 2i + 3 = (i + 2)^2 \land i + 1 \leq x\ |)\ Sa\ (|\ j = (i + 2)^2 \land i + 1 \leq x\ |)\= Atrib. \\
+  \:(|\ j = (i + 2)^2 \land i + 1 \leq x\ |)\ Sb\ (|\ INV\ |) \= Atrib.  \\
+  \:(|\ j + 2i + 3 = (i + 2)^2 \land i + 1 \leq x\ |)\ S\ (|\ INV\ |) \= Comp(1,2)  \\
+  \(\: j = (i + 1)^2 \land i \leq x \land i \neq x \= Hip., PRE \\
+    \: j = (i + 1)^2 \land i < x \= Def.\ \leq \\
+    \: j + 2i + 3 = (i + 1)^2 \land i < x \= j := j + 2 * i + 3 \\
+    \: j + 2i + 3 = (i + 2)^2 \land i + 1 < x \= i := i + 1 \\
+    \: j + 2i + 3 = (i + 2)^2 \land i + 1 \leq x \=\ PRE\ (x > 0)
+  \)\\
+  \:INV \land i \neq x \rightarrow j + 2 * i + 3 = (i + 2)^2 \land i + 1 \neq x \= \intro\rightarrow(4-8) \\
+  \:(|\ INV \land i \neq x \ |)\ S\ (|\ INV\ |) \= PreStren(9,3) \\
+  \:(|\ INV\ |)\ S2\ (|\ POS\ |) \= While(10) \\
+\end{proofbox}
+\hfill $\square$
+
+Por fim, podemos fazer a composição com o provado nas duas provas anteriores:
+\begin{proofbox}
+  \:(|\ PRE\ |)\ S1 \ (|\ INV\ |)\= Prova\ \#1 \\
+  \:(|\ INV\ |)\ S2 \ (|\ POS\ |)\= Prova\ \#2 \\
+  \:(|\ PRE\ |)\ S1; S2\ (|\ POS\ |) \= Comp(1,2)  \\
+\end{proofbox}
+\hfill $\square$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% PARTE 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Algoritmo 02}\label{sec:algo1}
+\begin{lstlisting}
+$Algoritmo\ 02\ (inteiros\ x,\ y,\ natural\ n)$
+$begin$
+$variaveis\ locais$
+$\ \ \ \ inteiros\ i,\ j;$
+$\ \ \ \ i := 0; j := x;$
+$\ \ \ \ while\ i \neq n$
+$\ \ \ \ \ \ \ \ j := j * y;$
+$\ \ \ \ \ \ \ \ i := i + 1$
+$end$
+\end{lstlisting}
+
+Através da definição do cabeçalho do programa, podemos inferir a pré-condição da Tripla de Hoare correspondente: $(|\ n \geq 0\ |)$. Ainda, através de um teste de
+mesa podemos levantar hipóteses a respeito do que o programa faz e a invariante do laço.
+
+// TO DO TABELA
+
+Analisando a tabela gerada, fica evidente que o programa tem, como objetivo, realizar o cálculo de $x*y^n$ e armazenar o resultado na variável $j$. Disto podemos concluir que a pós-condição
+da Tripla de Hoare é $(|\ j = x*y^n\ |)$. Além disto, encontramos um bom candidato para a invariante do laço: $j = x * y^i \land i \leq n$. Para ter certeza que a
+invariante é válida, é necessário realizar a prova formal da mesma.
+
+\subsection{Tripla de Hoare}
+
+\begin{lstlisting}
+$(| n \geq 0 |)$
+$i := 0; j := x;$
+$while\ i \neq n$
+$\ \ \ \ j := j * y;$
+$\ \ \ \ i := i + 1$
+$(| j = x*y^n |)$
+\end{lstlisting}
+
+\subsection{Prova da Invariante}\label{sec:algo1:invar}
+Devemos provar que a invariante permanece válida durante a execução do laço, não importando o número de iterações. Ou seja, devemos provar que:
+\[\forall n:\mathds{N}. j_n = x * y^i_n \land i_n \leq n\]
+
+Aplicando o teorema da distributividade do operador $\forall$\footnote{$\forall x.P(x) \land Q(x) = \forall x.P(x) \land \forall x.Q(x)$},
+podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n = x * y^i_n$ e $\forall n:\mathds{N}. i_n \leq n$.
+
+À partir disto, podemos aplicar técnicas de indução natural.
+
+\subsubsection{Prova - Parte I}
+
+\subsubsection{Prova - Parte II}
+
+\subsubsection{Prova da Tripla de Hoare}
 
 \section{Conclusão}
 \paragraph{}
