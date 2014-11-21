@@ -147,7 +147,8 @@ Agora, veja que:
 
 \subsubsection{Prova da Tripla de Hoare}
 
-Desejamos, agora, provar a correção parcial da Tripla de Hoare definida anteriormente. Para facilitar, algumas definições auxiliares:
+Desejamos, agora, provar a correção parcial da Tripla de Hoare definida
+anteriormente. Para tornar a leitura da prova mais agradável, algumas definições auxiliares:
 \begin{align}
 S1  &\triangleq i:=1;\ j:=4; \nonumber \\
 S2  &\triangleq while\ i \neq x\ \{ S \} \nonumber \\
@@ -233,9 +234,14 @@ $-$ & $5$ & $486$ & $2$ & $3$ & $5$ & $0 \neq 5$ & $486=2 \times 3^5 \land 5 \le
 \end{tabular}
 \end{table}
 
-Analisando a tabela gerada, fica evidente que o programa tem, como objetivo, realizar o cálculo de $x*y^n$ e armazenar o resultado na variável $j$. Disto podemos concluir que a pós-condição
-da Tripla de Hoare é $(|\ j = x*y^n\ |)$. Além disto, encontramos um bom candidato para a invariante do laço: $j = x * y^i \land i \leq n$. Para ter certeza que a
-invariante é válida, é necessário realizar a prova formal da mesma.
+Analisando a tabela gerada, fica evidente que o programa tem, como objetivo,
+realizar o cálculo de $xy^n$ e armazenar o resultado na variável $j$. Disto
+podemos concluir que a pós-condição da Tripla de Hoare é $(|\ j = xy^n \land i = n |)$.
+Além disso, encontramos um bom candidato para a invariante do laço:
+$j = x * y^i \land i \leq n$. Para ter certeza de que a invariante é válida, é necessário
+realizar a prova formal, por meio de indução, da mesma.
+
+\   % Linha em branco pra ficar mais bonito
 
 \subsection{Tripla de Hoare}
 
