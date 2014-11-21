@@ -283,6 +283,27 @@ Agora, veja que:
 
 \subsubsection{Prova - Parte II}
 
+Queremos provar que $\forall n:\mathds{N}. i_k \leq n$. A proposição pode ser reescrita da forma:
+\[P(k) \triangleq i_k \leq n\]
+
+\paragraph{Caso base} Precisamos provar que $P(0) \triangleq i_0 \leq n$
+Veja que:
+\begin{proofbox}
+  \:n \geq 0         \= PRE \\
+  \:\geq i_0         \= i:=0 \\
+\end{proofbox}
+\hfill $\square$
+
+\paragraph{Caso indutivo} Assumimos $P(k) \triangleq i_k \leq n$ como Hipótese de Indução ($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq i_{k+1} \leq n\]
+Agora, veja que:
+\begin{proofbox}
+  \:i_k \leq n \land i_k \neq n \= HI\ e\ loop \\
+  sse\:i_k < n                  \= Arit. \\
+  sse\:i_k + 1 \leq n           \= Arit. \\
+  sse\:i_{k+1} \leq n           \= i:=i+1 \\
+\end{proofbox}
+\hfill $\square$
+
 \subsubsection{Prova da Tripla de Hoare}
 
 \section{Conclusão}
