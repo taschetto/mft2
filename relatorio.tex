@@ -48,7 +48,7 @@ Grande do Sul (PUCRS) \\ Av. Ipiranga, 6681 - Porto Alegre / RS / Brasil
 \begin{lstlisting}
 $Algoritmo\ 01\ (inteiro\ positivo\ x)$
 $begin$
-$variaveis\ locais$
+$vari\acute{a}veis\ locais$
 $\ \ \ \ inteiros\ i,\ j;$
 $\ \ \ \ i := 1; j := 4;$
 $\ \ \ \ while\ i \neq x$
@@ -78,11 +78,11 @@ Analisando a tabela gerada, fica evidente que o programa tem como objetivo reali
 
 \begin{lstlisting}
 $(|\ x > 0\ |)$
-$i := 1;$
-$j := 4;$
-$while\ i \neq x$
-$\ \ \ \ j := j + 2 * i + 3;$
-$\ \ \ \ i := i + 1$
+$\ \ \ \ i := 1;$
+$\ \ \ \ j := 4;$
+$\ \ \ \ while\ i \neq x$
+$\ \ \ \ \ \ \ \ j := j + 2 * i + 3;$
+$\ \ \ \ \ \ \ \ i := i + 1$
 $(|\ j = (x+1)^2 \land i = x\ |)$
 \end{lstlisting}
 
@@ -110,7 +110,7 @@ Veja que:
 \paragraph{Caso indutivo} Assumimos $j_k = (i_k + 1)^2$ como Hipótese de Indução ($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq j_{k+1} = (i_{k+1} +1)^2\]
 Agora, veja que:
 \begin{proofbox}
-  \:j_{k+1} = j_k + 2*i_k + 3 \= j:=j+2*i+3 \\
+  \:j_{k+1} = j_k + 2i_k + 3 \= j:=j+2*i+3 \\
   \:= j_k + i_k + i_k + 3     \= arit   \\
   \:= j_k + i_k + i_k + 1 + 2 \= arit   \\
   \:= j_k + i_k + i_{k+1} + 2 \= i:=i+1 \\
@@ -186,7 +186,7 @@ Agora, desejamos provar que $(|\ INV\ |)\ S2\ (|\ POS\ |)$. Então, veja:
     \: j + 2i + 3 = (i + 2)^2 \land i + 1 < x \= i := i + 1 \\
     \: j + 2i + 3 = (i + 2)^2 \land i + 1 \leq x \=\ PRE\ (x > 0)
   \)\\
-  \:INV \land i \neq x \rightarrow j + 2 * i + 3 = (i + 2)^2 \land i + 1 \neq x \= \intro\rightarrow(4-8) \\
+  \:INV \land i \neq x \rightarrow j + 2i + 3 = (i + 2)^2 \land i + 1 \neq x \= \intro\rightarrow(4-8) \\
   \:(|\ INV \land i \neq x \ |)\ S\ (|\ INV\ |) \= PreStren(9,3) \\
   \:(|\ INV\ |)\ S2\ (|\ POS\ |) \= While(10) \\
 \end{proofbox}
@@ -238,7 +238,7 @@ Analisando a tabela gerada, fica evidente que o programa tem, como objetivo,
 realizar o cálculo de $xy^n$ e armazenar o resultado na variável $j$. Disto
 podemos concluir que a pós-condição da Tripla de Hoare é $(|\ j = xy^n \land i = n |)$.
 Além disso, encontramos um bom candidato para a invariante do laço:
-$j = x * y^i \land i \leq n$. Para ter certeza de que a invariante é válida, é necessário
+$j = xy^i \land i \leq n$. Para ter certeza de que a invariante é válida, é necessário
 realizar a prova formal, por meio de indução, da mesma.
 
 \   % Linha em branco pra ficar mais bonito
@@ -247,10 +247,10 @@ realizar a prova formal, por meio de indução, da mesma.
 
 \begin{lstlisting}
 $(| n \geq 0 |)$
-$i := 0; j := x;$
-$while\ i \neq n$
-$\ \ \ \ j := j * y;$
-$\ \ \ \ i := i + 1$
+$\ \ \ \ i := 0; j := x;$
+$\ \ \ \ while\ i \neq n$
+$\ \ \ \ \ \ \ \ j := j * y;$
+$\ \ \ \ \ \ \ \ i := i + 1$
 $(| j = x*y^n \land i = n |)$
 \end{lstlisting}
 
@@ -326,7 +326,7 @@ INV &\triangleq j = xy^i \land i \leq n \nonumber
 
 Em um primeiro momento desejamos provar a correção parcial de $(|\ PRE\ |)\ S1\ (|\ INV\ |)$. Agora, veja que:
 \begin{proofbox}
-  \:(|\ x = xy^0 \and 0 \leq n\ |)\ i:=0\ (|\ x = xy^i \land i \leq n\ |)\= Atrib. \\
+  \:(|\ x = xy^0 \land 0 \leq n\ |)\ i:=0\ (|\ x = xy^i \land i \leq n\ |)\= Atrib. \\
   \:(|\ x = xy^i \land i \leq n\ |)\ j:=x\ (|\ j = xy^i \land i \leq n\ |) \= Atrib.  \\
   \:(|\ 0 \leq n\ |)\ S1\ (|\ INV\ |) \= Comp(1,2)  \\
   \(\:n \geq 0 \= Hip., PRE \\
@@ -339,8 +339,8 @@ Em um primeiro momento desejamos provar a correção parcial de $(|\ PRE\ |)\ S1
 
 Agora, desejamos provar que $(|\ INV\ |)\ S2\ (|\ POS\ |)$. Então, veja:
 \begin{proofbox}
-    \:(|\ jy = xy^{i+1} \land i + 1 \leq n\ |)\ j:=j*y\ (|\ j = xy^{i+1} \land i + 1 \leq n\ |)\= Atrib. \\
-    \:(|\ j = xy^{i+1} \land i + 1 \leq n\ |)\ i:=i+1\ (|\ j = xy^i \land i \leq n\ |) \= Atrib.  \\
+    \:(|\ jy = xy^{i+1} \land i + 1 \leq n\ |)\ Sa\ (|\ j = xy^{i+1} \land i + 1 \leq n\ |)\= Atrib. \\
+    \:(|\ j = xy^{i+1} \land i + 1 \leq n\ |)\ Sb\ (|\ j = xy^i \land i \leq n\ |) \= Atrib.  \\
     \:(|\ jy = xy^{i+1} \land i + 1 \leq n\ |)\ S1\ (|\ INV\ |) \= Comp(1,2)  \\
     \(\:j = xy^i \land i \leq n \land i \neq n \= Hip. \\
         \:j = xy^i \land i < n  \= Def. Op \leq \\
@@ -349,9 +349,9 @@ Agora, desejamos provar que $(|\ INV\ |)\ S2\ (|\ POS\ |)$. Então, veja:
         \:jy = xy^i \times y \land i + 1 \leq n  \= Arit \\
         \:jy = xy^{i+1} \land i + 1 \leq n  \= Arit \\
     \)\\
-    \:j = xy^i \land i \leq n \land i \neq n \rightarrow jy = xy^{i+1} \land i + 1 \leq n \intro\rightarrow(4-9) \\
+    \:j = xy^i \land i \leq n \land i \neq n \rightarrow jy = xy^{i+1} \land i + 1 \leq n \= \intro\rightarrow(4-9) \\
     \:(|\ INV \land i \neq n\ |)\ S\ (|\ INV\ |) \= PreStren(10,3) \\
-    \:(|\ INV \ |)\ S\ (|\ INV \land i = n\ |) \= While(11) \\
+    \:(|\ INV \ |)\ S\ (|\ POS\ |) \= While(11) \\
 \end{proofbox}
 \hfill $\square$
 
@@ -365,19 +365,22 @@ Por fim, podemos fazer a composição com o provado nas duas provas anteriores:
 
 \section{Conclusão}
 
-A prova da invariante dos algoritmos nos dá um conhecimento maior a respeito do
-comportamento dos mesmos, munindo-nos de ferramentas para argumentar seu
+É inegável a utilidade de ferramentas formais para realizar provas sobre programas imperativos.
+Através da Indução Natural é possível provar a validade das invariantes de laços - estas,
+por sua vez, inferidas através de experimentos práticos mecânicos como testes de mesa. Além disso,
+a prova formal da invariante fornece um conhecimento maior a respeito do comportamento do laço - e,
+por consequência, do próprio programa -, deste modo munindo-nos de ferramentas para argumentar seu
 comportamento e correção.
 
-As Triplas de Hoare garantem a correção dos algoritmos em relação à
-especificação dos mesmos, provando que eles fazem o esperado e atendem às
-expectativas.
+Uma vez encontrada uma invariante válida, é possível aplicar a Lógica de Hoare para provar a correção
+parcial programas imperativos através da sua representação como uma Tripla de Hoare. A correção parcial
+indica que um programa indica que, dada uma memória que atenda a pré-condição, a memória resultante após
+a execução do programa necessariamente satisfará a pós-condição. Em outras palavras, a prova formal de
+correção parcial de uma Tripla de Hoare nos garante que o programa respeita o contrato estabelecido pelas
+pré e pós-condições. Ou seja, é uma ferramenta poderosa para validar a corretude de programas sem
+necessitar a realização de testes, por exemplo.
 
-Juntando ambas as provas, temos um poderoso conjunto de ferramentas e técnicas
-para garantirmos a ausência de bugs, tanto de implementação quanto de
-especificação, de um algoritmo.
-
-\bibliographystyle{sbc}
-\bibliography{teste}
+Em suma, a Indução Natural e a Lógica de Hoare formam um poderoso conjunto de ferramentas e técnicas
+para garantirmos a ausência de bugs, tanto de implementação quanto de especificação, de um programa.
 
 \end{document}
