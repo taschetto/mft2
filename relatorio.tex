@@ -247,19 +247,39 @@ $i := 0; j := x;$
 $while\ i \neq n$
 $\ \ \ \ j := j * y;$
 $\ \ \ \ i := i + 1$
-$(| j = x*y^n |)$
+$(| j = x*y^n \land i = n |)$
 \end{lstlisting}
 
 \subsection{Prova da Invariante}\label{sec:algo1:invar}
 Devemos provar que a invariante permanece válida durante a execução do laço, não importando o número de iterações. Ou seja, devemos provar que:
-\[\forall n:\mathds{N}. j_n = x * y^i_n \land i_n \leq n\]
+\[\forall n:\mathds{N}. j_n = xy^{i_n} \land i_n \leq n\]
 
 Aplicando o teorema da distributividade do operador $\forall$\footnote{$\forall x.P(x) \land Q(x) = \forall x.P(x) \land \forall x.Q(x)$},
-podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n = x * y^i_n$ e $\forall n:\mathds{N}. i_n \leq n$.
+podemos dividir a prova da invariante em duas partes: $\forall n:\mathds{N}. j_n
+= xy^{i_n}$ e $\forall n:\mathds{N}. i_n \leq n$.
 
-À partir disto, podemos aplicar técnicas de indução natural.
+A partir disto, podemos aplicar técnicas de indução natural.
 
 \subsubsection{Prova - Parte I}
+\paragraph{Caso base} Precisamos provar que $P(0) \triangleq j_0 = xy^2$
+Veja que:
+\begin{proofbox}
+    \:xy^{i_0} = xy^0         \= i:=0   \\
+  \:= x                       \= arit   \\
+  \:= j_0                     \= j:=x   \\
+\end{proofbox}
+\hfill $\square$
+
+\paragraph{Caso indutivo} Assumimos $j_k = xy^{i_k}$ como Hipótese de Indução
+($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq j_{k+1} = xy^{i_{k+1}}\]
+Agora, veja que:
+\begin{proofbox}
+    \:j_{k+1} = j_{k}y      \= j:=j*y \\
+    \:= (xy^{i_k})y         \= H.I.   \\
+    \:= xy^{i_k + 1}        \= arit   \\
+    \:= xy^{i_{k+1}}        \= i:=i+1 \\
+\end{proofbox}
+\hfill $\square$
 
 \subsubsection{Prova - Parte II}
 
