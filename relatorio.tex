@@ -298,7 +298,8 @@ Veja que:
 \end{proofbox}
 \hfill $\square$
 
-\paragraph{Caso indutivo} Assumimos $P(k) \triangleq i_k \leq n$ como Hipótese de Indução ($HI$). Logo, precisamos provar que: \[P(k+1) \triangleq i_{k+1} \leq n\]
+\paragraph{Caso indutivo} Assumimos $P(k) \triangleq i_k \leq n$ como Hipótese
+de Indução ($HI$). Logo, é necessário provar que: \[P(k+1) \triangleq i_{k+1} \leq n\]
 Agora, veja que:
 \begin{proofbox}
   \:i_k \leq n \land i_k \neq n \= HI\ e\ loop \\
@@ -310,7 +311,8 @@ Agora, veja que:
 
 \subsubsection{Prova da Tripla de Hoare}
 
-Desejamos, agora, provar a correção parcial da Tripla de Hoare definida anteriormente. Para facilitar, algumas definições auxiliares:
+Desejamos, agora, provar a correção parcial da Tripla de Hoare definida
+anteriormente para este algorítmo. Para tornar a leitura da prova mais agradável, vamos utilizar algumas definições auxiliares:
 \begin{align}
 S1  &\triangleq i:=0;\ j:=x; \nonumber \\
 S2  &\triangleq while\ i \neq n\ \{ S \} \nonumber \\
