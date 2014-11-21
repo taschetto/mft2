@@ -306,6 +306,57 @@ Agora, veja que:
 
 \subsubsection{Prova da Tripla de Hoare}
 
+Desejamos, agora, provar a correção parcial da Tripla de Hoare definida anteriormente. Para facilitar, algumas definições auxiliares:
+\begin{align}
+S1  &\triangleq i:=0;\ j:=x; \nonumber \\
+S2  &\triangleq while\ i \neq n\ \{ S \} \nonumber \\
+S   &\triangleq Sa;\ Sb \nonumber \\
+Sa  &\triangleq j:=j*y \nonumber \\
+Sb  &\triangleq i:=i+1 \nonumber \\
+PRE &\triangleq n > 0 \nonumber \\
+POS &\triangleq j = xy^n \land i = n \nonumber \\
+INV &\triangleq j = xy^i \land i \leq n \nonumber
+\end{align}
+
+Em um primeiro momento desejamos provar a correção parcial de $(|\ PRE\ |)\ S1\ (|\ INV\ |)$. Agora, veja que:
+\begin{proofbox}
+  \:(|\ x = xy^0 \and 0 \leq n\ |)\ i:=0\ (|\ x = xy^i \land i \leq n\ |)\= Atrib. \\
+  \:(|\ x = xy^i \land i \leq n\ |)\ j:=x\ (|\ j = xy^i \land i \leq n\ |) \= Atrib.  \\
+  \:(|\ 0 \leq n\ |)\ S1\ (|\ INV\ |) \= Comp(1,2)  \\
+  \(\:n \geq 0 \= Hip., PRE \\
+      \:0 \leq n \= Op. Sim(4) \\
+  \)\\
+  \:PRE \rightarrow 0 \leq n \= \intro\rightarrow(4-5) \\
+  \:(|\ PRE\ |)\ S1\ (|\ INV\ |) \= PreStren(6,3) \\
+\end{proofbox}
+\hfill $\square$
+
+Agora, desejamos provar que $(|\ INV\ |)\ S2\ (|\ POS\ |)$. Então, veja:
+\begin{proofbox}
+    \:(|\ jy = xy^{i+1} \land i + 1 \leq n\ |)\ j:=j*y\ (|\ j = xy^{i+1} \land i + 1 \leq n\ |)\= Atrib. \\
+    \:(|\ j = xy^{i+1} \land i + 1 \leq n\ |)\ i:=i+1\ (|\ j = xy^i \land i \leq n\ |) \= Atrib.  \\
+    \:(|\ jy = xy^{i+1} \land i + 1 \leq n\ |)\ S1\ (|\ INV\ |) \= Comp(1,2)  \\
+    \(\:j = xy^i \land i \leq n \land i \neq n \= Hip. \\
+        \:j = xy^i \land i < n  \= Def. Op \leq \\
+        \:n \geq 0              \= PRE \\
+        \:j = xy^i \land i + 1 \leq n  \= Def. Op <(5,6) \\
+        \:jy = xy^i \times y \land i + 1 \leq n  \= Arit \\
+        \:jy = xy^{i+1} \land i + 1 \leq n  \= Arit \\
+    \)\\
+    \:j = xy^i \land i \leq n \land i \neq n \rightarrow jy = xy^{i+1} \land i + 1 \leq n \intro\rightarrow(4-9) \\
+    \:(|\ INV \land i \neq n\ |)\ S\ (|\ INV\ |) \= PreStren(10,3) \\
+    \:(|\ INV \ |)\ S\ (|\ INV \land i = n\ |) \= While(11) \\
+\end{proofbox}
+\hfill $\square$
+
+Por fim, podemos fazer a composição com o provado nas duas provas anteriores:
+\begin{proofbox}
+  \:(|\ PRE\ |)\ S1 \ (|\ INV\ |)\= Prova\ \#1 \\
+  \:(|\ INV\ |)\ S2 \ (|\ POS\ |)\= Prova\ \#2 \\
+  \:(|\ PRE\ |)\ S1; S2\ (|\ POS\ |) \= Comp(1,2)  \\
+\end{proofbox}
+\hfill $\square$
+
 \section{Conclusão}
 \paragraph{}
 Insira conclusão aqui.
